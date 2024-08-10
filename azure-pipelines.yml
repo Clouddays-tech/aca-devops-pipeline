@@ -13,7 +13,7 @@ resources:
 
 variables:
   IMAGE_NAME: clouddays101/album-backend-api
-  CONTAINERAPPS_APP: album-backend-api
+  CONTAINERAPPS_APP: my-container-app
   CONTAINERAPPS_ENVIRONMENT: aca-environment
   RESOURCE_GROUP: rg-aca-pipeline
   TAG: '$(Build.BuildId)'
