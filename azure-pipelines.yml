@@ -12,10 +12,10 @@ resources:
 - repo: self
 
 variables:
-  IMAGE_NAME: houssemdocker/album-backend-api
+  IMAGE_NAME: clouddays101/album-backend-api
   CONTAINERAPPS_APP: album-backend-api
   CONTAINERAPPS_ENVIRONMENT: aca-environment
-  RESOURCE_GROUP: rg-containerapps-azure-pipelines
+  RESOURCE_GROUP: rg-aca-pipeline
   TAG: '$(Build.BuildId)'
 
 stages:
@@ -23,7 +23,7 @@ stages:
   displayName: Build and push image
   jobs:
   - job: Build
-    displayName: Build
+    displayName: BUILD
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -39,7 +39,7 @@ stages:
     - task: Docker@2
       displayName: Push image to Docker Hub
       inputs:
-        containerRegistry: 'dockerhub-connection'
+        containerRegistry: 'dockerhub-sc'
         repository: $(IMAGE_NAME)
         command: 'push'
         tags: '$(TAG)'
@@ -48,15 +48,15 @@ stages:
   displayName: Deploy to Container Apps
   jobs:
   - job: Deploy
-    displayName: Deploy
+    displayName: DEPLOY
     pool:
       vmImage: ubuntu-latest
     steps:
 
     - task: AzureContainerApps@1
-      displayName: Deploy new container version
+      displayName: Deploy new container version to ACA
       inputs:
-        azureSubscription: 'azure-connection'
+        azureSubscription: 'azure-sc'
         imageToDeploy: '$(IMAGE_NAME):$(TAG)'
         containerAppName: '$(CONTAINERAPPS_APP)'
         resourceGroup: '$(RESOURCE_GROUP)'
