@@ -17,7 +17,7 @@ variables:
   CONTAINERAPPS_ENVIRONMENT: aca-environment
   RESOURCE_GROUP: rg-aca-pipeline
   TAG: '$(Build.BuildId)'
-  runBuild: 'true' # Set to 'false' if you want to skip the build
+  runBuild: 'false' # Set to 'false' if you want to skip the build
 
 stages:
 - stage: Build
