@@ -17,7 +17,7 @@ variables:
   CONTAINERAPPS_ENVIRONMENT: aca-environment
   RESOURCE_GROUP: rg-aca-pipeline
   TAG: '$(Build.BuildId)'
-  runBuild: 'false' # Set to 'false' if you want to skip the build
+  runBuild: 'true' # Set to 'false' if you want to skip the build
 
 stages:
 - stage: Build
@@ -47,7 +47,7 @@ stages:
         tags: '$(TAG)'
 
 - stage: Deploy
-  dependsOn: []
+  dependsOn: Build
   condition: always() # Run deploy only if build stage is completed
   displayName: Deploy to Container Apps
   jobs:
